@@ -32,8 +32,8 @@ int print_char(va_list types, char buffer[],
 int print_string(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int Length = 0.
-int a;
+	int Length = 0;
+	int a;
 	char *st_r = va_arg(types, char *);
 
 	UNUSED(buffer);
@@ -52,13 +52,13 @@ int a;
 		Length++;
 
 	if (precision >= 0 && precision < Length)
-		length = precision;
+		Length = precision;
 
 	if (width > Length)
 	{
 		if (flags & F_MINUS)
 		{
-			write(1, &st_r[0], length);
+			write(1, &st_r[0], Length);
 			for (a = width - Length; a > 0; a--)
 				write(1, " ", 1);
 			return (width);
@@ -157,10 +157,7 @@ int print_int(va_list types, char buffer[],
 int print_binary(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	unsigned int n;
-int M;
-int I
-int Sum;
+	unsigned int n, M, I, Sum;
 	unsigned int a[32];
 	int count;
 
@@ -171,7 +168,7 @@ int Sum;
 	UNUSED(size);
 
 	n = va_arg(types, unsigned int);
-	M = 2147483648; /* (2 ^ 31) */
+	M = 2147483648;
 	a[0] = n / M;
 	for (I = 1; I < 32; I++)
 	{
@@ -183,7 +180,7 @@ int Sum;
 		Sum += a[I];
 		if (Sum || I == 31)
 		{
-			char z = '0' + a[i];
+			char z = '0' + a[I];
 
 			write(1, &z, 1);
 			count++;
